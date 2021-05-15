@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import LoginPage from "../integration/pageObjectModels/loginLogoutModel";
+import 'cypress-file-upload';
 
 Cypress.Commands.add('login', (email, password) =>{
     const lp = new LoginPage()
@@ -32,3 +33,4 @@ Cypress.Commands.add('login', (email, password) =>{
     lp.fillPassword(password)
     lp.submitUser()
 })
+
