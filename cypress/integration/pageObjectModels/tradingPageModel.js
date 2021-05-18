@@ -65,10 +65,21 @@ class tradingPageModel {
 
     selectCompany(text){
         cy.get('#select-company > div > span').click()
-        cy.wait(2000)
+        cy.wait(4000)
         cy.xpath(`//ng-dropdown-panel/div/div/div/span[contains(text(),'${text}')]`).scrollIntoView().should('be.visible').click()
     }
 
+    checkSearchResult(textList){
+        const result = cy.get('xc-abstract-offer-search-row:nth-child(4) > div')
+        for (let parameter of textList){
+            result.should('contain', parameter)
+        }
+    }
+
+    checkEmptySearchResult(){
+        const result = cy.get('xc-modal-container > div > div > div > div').should('contain', 'available that is matching your search')
+    }
+
 }
-// xc-abstract-offer-search-row:nth-child(4) > div
+
 export default tradingPageModel

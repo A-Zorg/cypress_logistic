@@ -24,10 +24,14 @@ Given('click Trading icon on the MainBar', () => {
     cy.wait(2000)
 })
 
-And('click', () => {
+And('click {string} button', (buttonName) => {
     const button = new tradingPageModel()
-    button.clickFindSalesOfferButton()
-    button.clickFindBuyingDemandButton()
+    if (buttonName === 'Find sales offers'){
+        button.clickFindSalesOfferButton()
+    } else if(buttonName === 'Find buying demands'){
+        button.clickFindBuyingDemandButton()
+    }
+
 
     // cy.get('body > div.app__container > xc-app > div.content__wrap > xc-trading > div > xc-trading-page > div > xc-search-page > form > div > xc-table-layout > div > div > xc-abstract-offer-search-row:nth-child(4) > div')
     //     .should('contain.text', 'DUBAI')
@@ -61,4 +65,15 @@ And('select company: {string}', (text) => {
 And('click Search button', () => {
     const button = new tradingPageModel()
     button.clickSearchButton()
+})
+
+Then('{string} search result should contain: {string}', (position, exp_param) => {
+    const func = new tradingPageModel()
+    if (position === 'none'){
+        func.checkEmptySearchResult()
+    } else{
+        const paramList = exp_param.split('-')
+        func.checkSearchResult(paramList)
+    }
+
 })

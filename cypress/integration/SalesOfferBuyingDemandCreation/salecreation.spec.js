@@ -115,3 +115,9 @@ And('to TRADING page', () => {
     const newSale = new tradingNewSalesModel()
     newSale.toTradingPageButton()
 })
+
+And('click the button OTHER DETAILS', (button_name) => {
+    const newSale = new tradingNewSalesModel()
+    newSale.otherDetailsButton()
+})
+

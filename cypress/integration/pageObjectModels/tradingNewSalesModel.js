@@ -51,6 +51,25 @@ class tradingNewSalesModel {
         cy.get("[formcontrolname=comments]").type(value).type('{enter}')
     }
 
+    pickupDateField(value){
+        cy.get(' div:nth-child(1) > xc-date-input > div > label').should('contain','Date when ready for pickup')
+        cy.get("div:nth-child(1) > xc-date-input > div > div > input:nth-child(2)").type(value).type('{enter}')
+    }
+    CSCexpireDateField(value){
+        cy.get('div:nth-child(2) > xc-date-input > div > label').should('contain','Date when CSC expires')
+        cy.get("div:nth-child(2) > xc-date-input > div > div > input:nth-child(2)").type(value).type('{enter}')
+    }
+
+    ContainerPrefixesField(value){
+        cy.get(' div:nth-child(12) > div:nth-child(1) > xc-input-wrap > div > label > span').should('contain','Container prefixes')
+        cy.get(" div:nth-child(12) > div:nth-child(1) > xc-input-wrap > div > div>input").type(value).type('{enter}')
+    }
+
+    ContainerColorsField(value){
+        cy.get('div:nth-child(2) > xc-input-wrap > div > label > span').should('contain','Container colors')
+        cy.get("div:nth-child(2) > xc-input-wrap > div > div>input").type(value).type('{enter}')
+    }
+
     fileField(fileName){
         const nameFormatList = fileName.split('.')
         const mimeTypes = {
@@ -93,6 +112,18 @@ class tradingNewSalesModel {
           cy.get('div > div > xc-button.ng-star-inserted > button')
             .should('have.text', 'Done for now').click()
     }
+
+    otherDetailsButton(){
+          const button = cy.get('xc-optional-data-form > xc-spacing > button')
+          button.then(($btn) => {
+              if ($btn.hasClass('fal fa-chevron-down')) {
+                  button.should('contain', ' Hide other details ').click()
+              } else {
+                  button.should('contain', ' Show other details ').click()
+              }
+          })
+    }
+
 }
 
 export default tradingNewSalesModel
