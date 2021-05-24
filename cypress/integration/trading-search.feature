@@ -1,13 +1,12 @@
 Feature: trading search
 
-
   Scenario Outline: check searching of the "Trading" page
-    Given click Trading icon on the MainBar
-     And click "<button>" button
-     And input text to the "search location" field: "<location>"
-     And input text to the "container type" field: "<container_type>"
-     And select condition: "<condition>"
-     And select company: "<company>"
+    Given I open the Trading application
+     And I select searching type "<button>"
+     And I fill text to the "search location" field: "<location>"
+     And I fill text to the "container type" field: "<container_type>"
+     And I select condition: "<condition>"
+     And I select company: "<company>"
     When click Search button
     Then "<result>" search result should contain: "<location>-<abbreviation_type>"
 

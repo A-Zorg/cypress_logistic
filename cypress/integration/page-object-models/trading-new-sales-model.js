@@ -1,46 +1,52 @@
 /// <reference types="cypress" />
 
-class tradingNewSalesModel {
+class TradingNewSalesModel {
 
     locationField(value){
-          cy.get('div.form-single-input > xc-input-wrap > div > label > span').should('have.text','Location')
-          cy.get('div.form-single-input > xc-input-wrap > div > div > ng-select > div > div > div.ng-input > input[type=text]')
+          cy.get("xc-input-wrap[label='Location']>div>label>span").should('have.text','Location')
+          cy.get("ng-select[formcontrolname='location']>div>div>div>input")
             .type(value).type('{enter}')
 
     }
+
     typeField(value){
-        cy.get('div.form-multi-input > div:nth-child(1) > xc-input-wrap > div > label > span').should('have.text','Type')
-          cy.get('div:nth-child(1) > xc-input-wrap > div > div > ng-select > div > div > div.ng-input > input[type=text]')
+        cy.get("xc-input-wrap[label='Type']>div>label>span").should('have.text','Type')
+          cy.get("ng-select[formcontrolname='equipmentType']>div>div>div>input")
             .type(value).type('{enter}')
     }
+
     conditionField(value){
-        cy.get('div.form-multi-input > div:nth-child(2) > xc-input-wrap > div > label > span').should('have.text','Condition')
-          cy.get('div.form-multi-input > div:nth-child(2) > xc-input-wrap > div > div > ng-select > div > div > div.ng-input > input[type=text]')
+        cy.get("xc-input-wrap[label='Condition']>div>label>span").should('have.text','Condition')
+          cy.get("ng-select[formcontrolname='unitCondition']>div>div>div>input")
             .type(value).type('{enter}')
     }
+
     fromYearField(value){
-        cy.get('div.form-yom-input > div:nth-child(1) > xc-input-wrap > div > label > span').should('have.text','From (optional)')
+        cy.get('xc-input-wrap[label=\'From (optional)\']>div>label>span').should('have.text','From (optional)')
           cy.get('[formcontrolname="yearOfManufactureRangeFrom"]')
             .type(value).type('{enter}')
     }
+
     toYearField(value){
-        cy.get('div.form-yom-input > div:nth-child(2) > xc-input-wrap > div > label > span').should('have.text','To (optional)')
+        cy.get('xc-input-wrap[label=\'To (optional)\']>div>label>span').should('have.text','To (optional)')
           cy.get('[formcontrolname="yearOfManufactureRangeTo"]')
             .type(value).type('{enter}')
     }
 
     targetPriceconditionField(value){
-        cy.get('xc-input-group > div > label').should('have.text','Target price')
+        cy.get('xc-input-group[label=\'Target price\']>div>label').should('have.text','Target price')
           cy.get('input[formcontrolname=price]')
             .type(value)
     }
+
     quantityField(value){
-        cy.get('div:nth-child(2) > xc-input-wrap > div > label > span').should('have.text','Quantity')
+        cy.get('xc-input-wrap[label=\'Quantity\']>div>label').should('have.text','Quantity')
           cy.get('input[formcontrolname=quantity]')
             .type(value)
     }
+
     validForField(value){
-        cy.get('div:nth-child(3) > xc-input-wrap > div > label > span').should('have.text','Valid for')
+        cy.get('xc-input-wrap[label=\'Valid for\']>div>label').should('have.text','Valid for')
         cy.get("xc-input-wrap > div > div > ng-select > div > span").click()
         cy.xpath(`//span[contains(text(),'${value}')]`)
             .click()
@@ -52,22 +58,36 @@ class tradingNewSalesModel {
     }
 
     pickupDateField(value){
-        cy.get(' div:nth-child(1) > xc-date-input > div > label').should('contain','Date when ready for pickup')
+        cy.get('xc-date-input[label=\'Date when ready for pickup\']>div>label')
+            .should('contain','Date when ready for pickup')
         cy.get("div:nth-child(1) > xc-date-input > div > div > input:nth-child(2)").type(value).type('{enter}')
     }
     CSCexpireDateField(value){
-        cy.get('div:nth-child(2) > xc-date-input > div > label').should('contain','Date when CSC expires')
+        // cy.get('xc-date-input[label=\'Date when CSC expires\']>div>label').should('contain','Date when CSC expires')
         cy.get("div:nth-child(2) > xc-date-input > div > div > input:nth-child(2)").type(value).type('{enter}')
     }
 
-    ContainerPrefixesField(value){
-        cy.get(' div:nth-child(12) > div:nth-child(1) > xc-input-wrap > div > label > span').should('contain','Container prefixes')
-        cy.get(" div:nth-child(12) > div:nth-child(1) > xc-input-wrap > div > div>input").type(value).type('{enter}')
+    containerPrefixesField(value){
+        cy.get('xc-input-wrap[label=\'Container prefixes\']>div>label>span').should('contain','Container prefixes')
+        cy.get("div:nth-child(1) > xc-input-wrap > div > div>input").type(value).type('{enter}')
     }
 
-    ContainerColorsField(value){
-        cy.get('div:nth-child(2) > xc-input-wrap > div > label > span').should('contain','Container colors')
+    containerColorsField(value){
+        cy.get('xc-input-wrap[label=\'Container colors\']>div>label>span').should('contain','Container colors')
         cy.get("div:nth-child(2) > xc-input-wrap > div > div>input").type(value).type('{enter}')
+    }
+
+    containerForRadioButton(value){
+        cy.get('xc-input-wrap > div > label > span').should('contain','containers for')
+        if (value.toLowerCase() === 'export'){
+            cy.get("xc-radio-list > div > xc-radio:nth-child(1) > label>div")
+                .should('contain', ' Export ')
+                .click()
+        }else if (value.toLowerCase() === 'domestic use'){
+            cy.get("xc-radio-list > div > xc-radio:nth-child(2) > label > div")
+                .should('contain', ' Domestic use ')
+                .click()
+        }
     }
 
     fileField(fileName){
@@ -126,4 +146,4 @@ class tradingNewSalesModel {
 
 }
 
-export default tradingNewSalesModel
+export default TradingNewSalesModel

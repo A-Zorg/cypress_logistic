@@ -23,7 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import LoginPage from "../integration/pageObjectModels/loginLogoutModel";
+import LoginPage from "../integration/page-object-models/login-logout.model";
 import 'cypress-file-upload';
 
 Cypress.Commands.add('login', (email, password) =>{

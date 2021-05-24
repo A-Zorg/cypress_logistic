@@ -2,7 +2,7 @@
 
 class MainBar {
 
-    TradingClick() {
+    tradingClick() {
         const name = cy.get('[data-test-id=nav-trading-page] >div>span')
         name.should('have.text', 'Trading')
 
