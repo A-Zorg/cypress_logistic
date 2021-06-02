@@ -11,9 +11,9 @@ Feature: check of new sales offer and buying demand
     Then check created "SALES OFFER" with prev parameters:"<price>", "<location>", "<qty>", "<offer_type>", "<condition>", " <from_year>-<to_year> "
      And to TRADING page
   Examples:
-      | location | condition | offer_type | from_year | to_year | price | qty | valid | comment        | file_path      | radio        | pickup_date| csc_date  | prefix | color  |
-      |  DUBAI   | Brand new | 20 Open top| 2020      | 2021    | 12    | 32  | 1 year| enter some text| cont_image.jpg | domestic use | 14.05.2021 | 16.05.2021 | MSCU   | RAL12345 |
-      |  AJMAN   | Brand new |20 Side door| 2009      | 2018    | 67    | 2   |1 month| enter some text| cont_image.jpg |domestic use|"14.05.2021" |"16.05.2021"| MSCU   |RAL12345|
+      | location | condition | offer_type   | from_year | to_year | price | qty | valid | comment        | file_path      | radio        | pickup_date| csc_date   | prefix | color    |
+      |  DUBAI   | Brand new | 20 Open top  | 2020      | 2021    | 12    | 32  | 1 year| enter some text| cont_image.jpg | domestic use | 14.05.2021 | 16.05.2021 | MSCU   | RAL12345 |
+      |  AJMAN   | Brand new | 20 Side door | 2009      | 2018    | 67    | 2   |1 month| enter some text| cont_image.jpg | domestic use | 14.05.2021 | 16.05.2021 | MSCU   | RAL12345 |
 
 
   Scenario Outline: Creation of Buying Demand

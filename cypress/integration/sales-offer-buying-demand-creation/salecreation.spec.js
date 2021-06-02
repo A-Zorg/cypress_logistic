@@ -14,7 +14,7 @@ const {
 
 let context = {}
 Before(() => {
-       cy.fixture('example').then(function(data) {
+       cy.fixture('cred-user-1').then(function(data) {
            context['config'] = data
             cy.login(data.email, data.password)
         })
@@ -150,10 +150,10 @@ And('fill the field -container colors- with {string}', (comment) => {
 Then('check created {string} with prev parameters:{string}, {string}, {string}, {string}, {string}, {string}', (type_name, price, location, qty, type_s, condition, years) => {
     let text = ''
     if (type_name === 'SALES OFFER'){
-        text = 'So good! You just published a new sales offer.'
+        text = 'So good! You just published a new sales offer'
     }
     else if (type_name === 'BUYING DEMAND'){
-        text = 'So good! You just published a new buying demand.'
+        text = 'So good! You just published a new buying demand'
     }
 
     const newSale = new TradingNewSalesModel()

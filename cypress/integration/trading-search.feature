@@ -11,7 +11,7 @@ Feature: trading search
     Then "<result>" search result should contain: "<location>-<abbreviation_type>"
 
       Examples:
-      | button               | location| container_type   | abbreviation_type | condition     | company       | result |
-      |  Find sales offers   | HAMBURG | 40 High cube (HC)| 40HC              | Cargo worthy  | Any company   |  none  |
-      |  Find buying demands | HAMBURG | 40 High cube (HC)| 40HC              | Cargo worthy  | InviCont      |  all   |
+      | button               | location| container_type  | abbreviation_type | condition     | company       | result |
+      |  Find sales offers   | AJMAN   | 20 Side door    | 20SD              | Brand new     | xChange   |  all   |
+      |  Find buying demands | DUBAI   | 20 Open top     | 20OT              | Brand new     | Any company   |  all   |
 

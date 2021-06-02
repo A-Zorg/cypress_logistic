@@ -11,6 +11,12 @@ class MainBar {
         icon.click()
     }
 
+    logOut() {
+        const icon = cy.get('button[data-test-id="nav-context-menu"]')
+        icon.click()
+        cy.contains('Log out').click()
+    }
+
 }
 export default MainBar
 

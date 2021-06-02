@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 
 class TradingSearchPageModel{
     clickSearchButton(){
@@ -8,7 +7,7 @@ class TradingSearchPageModel{
     }
 
     clickFindSalesOfferButton(){
-        cy.get('xc-nav-tabs > a:nth-child(2)').click()
+        // cy.get('xc-nav-tabs > a:nth-child(2)').click()
         cy.get('xc-nav-tabs > a:nth-child(1)')
             .should('not.have.class', 'active')
             .click()
@@ -16,7 +15,7 @@ class TradingSearchPageModel{
     }
 
     clickFindBuyingDemandButton(){
-        cy.get('xc-nav-tabs > a:nth-child(1)').click()
+        // cy.get('xc-nav-tabs > a:nth-child(1)').click()
         cy.get('xc-nav-tabs > a:nth-child(2)')
             .should('not.have.class', 'active')
             .click()
@@ -43,9 +42,9 @@ class TradingSearchPageModel{
             .should('contain', text)
             .click()
 
-        if (clear === true){
-            cy.get('div.xc-trading-search__equipment-type-input > ng-select > div > span.ng-clear-wrapper').click()
-        }
+        // if (clear === true){
+        //     cy.get('div.xc-trading-search__equipment-type-input > ng-select > div > span.ng-clear-wrapper').click()
+        // }
     }
 
     selectCondition(text){
@@ -79,6 +78,7 @@ class TradingSearchPageModel{
     }
 
     clickStartNegotiationButton(button_number=1){
+        // cy.contains('Start negotiation').first().click()
         cy.get(`xc-abstract-offer-search-row:nth-child(${3+button_number})>div>div>div>div>div>xc-button>button`)
             .should('contain', 'Start negotiation')
             .click()

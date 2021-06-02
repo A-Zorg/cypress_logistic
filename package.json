@@ -9,7 +9,7 @@
   "author": "stepan",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^7.3.0",
+    "cypress": "^7.4.0",
     "cypress-cucumber-preprocessor": "^4.1.0",
     "cypress-file-upload": "^5.0.7",
     "cypress-xpath": "^1.6.2"

@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 
 class TradingPageModel {
 
@@ -17,39 +15,46 @@ class TradingPageModel {
     }
 
     clickSearchTab(){
-        cy.url().should('include', 'trading/search')
         cy.get('nav > xc-menu > a:nth-child(1)')
             .should('have.text', ' Search ')
             .click()
         cy.get('nav > xc-menu > a:nth-child(1)')
             .should('have.class', 'active')
+        cy.url().should('include', 'trading/search')
+
+        cy.wait(3000)
+        cy.get('body').then(($body) => {
+            if ($body.text().includes('There is currently no')) {
+              cy.get('button[class="xc-times-button xc-ripple"]').click()
+            }
+         })
     }
 
     clickMyOffersTab(){
-        cy.url().should('include', 'trading/my-offers')
         cy.get('nav > xc-menu > a:nth-child(2)')
             .should('have.text', ' My Offers ')
             .click()
         cy.get('nav > xc-menu > a:nth-child(2)')
             .should('have.class', 'active')
+        cy.url().should('include', 'trading/my-offers')
     }
 
     clickMyDemandsTab(){
-        cy.url().should('include', 'trading/my-demands')
         cy.get('nav > xc-menu > a:nth-child(3)')
             .should('have.text', ' My demands ')
             .click()
         cy.get('nav > xc-menu > a:nth-child(3)')
             .should('have.class', 'active')
+        cy.url().should('include', 'trading/my-demands')
     }
 
     clickInboxTab(){
-        cy.url().should('include', 'trading/my-inbox')
         cy.get('nav > xc-menu > a:nth-child(4)')
             .should('contain', 'Inbox')
             .click()
         cy.get('nav > xc-menu > a:nth-child(4)')
             .should('have.class', 'active')
+        cy.url().should('include', 'trading/my-inbox')
     }
 
 }

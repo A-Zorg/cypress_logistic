@@ -2,16 +2,20 @@
 
 
 class NegotiationFrame{
-    inputPrice(text){
-        cy.get('input[formcontrolname=price]').clear().type(text)
+    inputPrice(difference){
+        cy.get('input[formcontrolname=price]').invoke('val').then(function (price) {
+            const newPrice = parseFloat(price) + difference
+            cy.get('input[formcontrolname=price]').clear().type(newPrice)
+        })
+
     }
 
     inputQty(text){
-        cy.get('input[formcontrolname=quantity]').type(text)
+        cy.get('input[formcontrolname=quantity]').clear().type(text)
     }
 
     inputComment(text){
-        cy.get('textarea[formcontrolname=firstChatMessage]').type(text)
+        cy.get('textarea[formcontrolname=firstChatMessage]').clear().type(text)
     }
 
     checkbox(selected=true){

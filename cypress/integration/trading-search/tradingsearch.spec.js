@@ -16,7 +16,7 @@ const {
 
 let context = {}
 Before(() => {
-       cy.fixture('example').then(function(data) {
+       cy.fixture('cred-user-1').then(function(data) {
            context['config'] = data
             cy.login(data.email, data.password)
         })
@@ -53,7 +53,7 @@ And('I fill text to the "search location" field: {string}', (text) => {
 
 And('I fill text to the "container type" field: {string}', (text) => {
     const field = new TradingSearchPageModel()
-    field.inputContainerType(text, true)
+    field.inputContainerType(text, false)
 })
 
 And('I select condition: {string}', (text) => {
@@ -84,7 +84,7 @@ Then('{string} search result should contain: {string}', (position, exp_param) =>
 
 And('click on Search tab', () => {
     const button = new TradingPageModel()
-    cy.visit('http://docker.develop:6680/trading/deal/5553', {failOnStatusCode:false})
+    cy.visit('trading/deal/5553', {failOnStatusCode:false})
     const asd = new TradingDealPageModel()
     // asd.updateOfferPrice(345)
     // asd.updateOffeDailyStorage(23)

@@ -95,6 +95,7 @@ class TradingNewSalesModel {
         const mimeTypes = {
             'jpg': 'image/jpg',
             'png': 'image/png',
+            'pdf': 'application/pdf',
         }
         cy.xpath('//h3[contains(text(),\'Documents\')]').should('have.text','Documents')
         cy.fixture(fileName).then(fileContent => {
@@ -111,8 +112,8 @@ class TradingNewSalesModel {
             .should('have.text',` $${price} `)
         cy.get('#cdk-overlay-0 > xc-abstract-offer-step-modal-new > xc-popup-fullscreen > div > xc-popup-content > div > xc-create-abstract-offer-success > div > xc-abstract-offer-search-row > div > div > div > div:nth-child(2) > xc-location-chip')
             .should('have.text',location)
-        cy.get(`div.equipment-type-condition__count.ng-star-inserted`)
-            .should('have.text',qty)
+        // cy.get(`xc-equipment-type-condition > div.equipment-type-condition__count.ng-star-inserted`)
+        //     .should('have.text',qty)
         // cy.xpath('//body/div[3]/div[2]/div[1]/xc-abstract-offer-step-modal-new[1]/xc-popup-fullscreen[1]/div[1]/xc-popup-content[1]/div[1]/xc-create-abstract-offer-success[1]/div[1]/xc-abstract-offer-search-row[1]/div[1]/div[1]/div[1]/div[3]/div[2]/xc-equipment-type-condition[1]/div[3]/span[1]')
         //     .should('have.text',sale_type)
         cy.get("span.equipment-type-condition__condition.ng-star-inserted")
@@ -120,7 +121,7 @@ class TradingNewSalesModel {
         cy.get('#cdk-overlay-0 > xc-abstract-offer-step-modal-new > xc-popup-fullscreen > div > xc-popup-content > div > xc-create-abstract-offer-success > div > xc-abstract-offer-search-row > div > div > div > div:nth-child(4) > div.xc-abstract-offer-search-row__yom.ng-star-inserted')
             .should('have.text',yearsInterval)
         cy.xpath(`//p[contains(text(),'${text}')]`)
-            .should('have.text',text)
+            .should('contain',text)
     }
 
      nextStepButton(value){
@@ -129,8 +130,8 @@ class TradingNewSalesModel {
     }
 
     toTradingPageButton(){
-          cy.get('div > div > xc-button.ng-star-inserted > button')
-            .should('have.text', 'Done for now').click()
+          cy.get('i[class="fal fa-times"]')
+            .click()
     }
 
     otherDetailsButton(){

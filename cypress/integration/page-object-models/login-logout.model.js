@@ -4,7 +4,8 @@
 class LoginPage
 {
     visit(){
-        cy.visit('http://docker.develop:6680/login', {failOnStatusCode:false})
+
+      cy.visit('login', {failOnStatusCode:false})//cy.visit('https://dev.container-xchange.com/login', {failOnStatusCode:false})
     }
 
     fillEmail(value){
