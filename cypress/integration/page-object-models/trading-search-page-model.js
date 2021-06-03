@@ -1,5 +1,11 @@
+import {lastUpdate} from "../toolz/tools";
 
 class TradingSearchPageModel{
+
+    clickButton(name){
+        cy.xpath(`//button/span[contains(text(),'${name}')]`).click()
+    }
+
     clickSearchButton(){
         cy.get('div.xc-trading-search__search-bar > xc-button > button')
             .should('have.text', ' Search ')
@@ -7,7 +13,7 @@ class TradingSearchPageModel{
     }
 
     clickFindSalesOfferButton(){
-        // cy.get('xc-nav-tabs > a:nth-child(2)').click()
+        cy.get('xc-nav-tabs > a:nth-child(2)').click()
         cy.get('xc-nav-tabs > a:nth-child(1)')
             .should('not.have.class', 'active')
             .click()
@@ -15,7 +21,7 @@ class TradingSearchPageModel{
     }
 
     clickFindBuyingDemandButton(){
-        // cy.get('xc-nav-tabs > a:nth-child(1)').click()
+        cy.get('xc-nav-tabs > a:nth-child(1)').click()
         cy.get('xc-nav-tabs > a:nth-child(2)')
             .should('not.have.class', 'active')
             .click()
@@ -91,10 +97,65 @@ class TradingSearchPageModel{
             cy.get(`a[href='${href}']`).click()
             cy.url().should('include', href)
         })
-
+    }
+//------------------------------------search entity START---------------------------------------
+    getSeachEntityRows(){
+        const selector = ` xc-abstract-offer-search-row`
+        return cy.get(selector).its('length').then(function (lenght) {
+            cy.wrap(lenght).as('searchRows')
+        })
+    }
+    getSeachEntity(row_number=1){
+        const selector = ` xc-abstract-offer-search-row:nth-child(${3+row_number})`
+        return cy.get(selector)
     }
 
+    getSeachEntityPrice(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('div[class="xc-abstract-offer-search-row__price"]').invoke('text').as('price')
+    }
+    getSeachEntityLocation(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('xc-location-chip').invoke('text').as('location')
+    }
+    getSeachEntityQty(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('div.equipment-type-condition__count').invoke('text').as('qty')
+    }
+    getSeachEntityType(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('span[class="equipment-type-condition__type"]').invoke('text').as('type')
+    }
+    getSeachEntityCondition(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('span[class="equipment-type-condition__condition ng-star-inserted"]').invoke('text').as('condition')
+    }
+    getSeachEntityYears(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('div[class="xc-abstract-offer-search-row__yom ng-star-inserted"]').invoke('text').as('yom')
+    }
+    clickSeachEntityButton(buttonName, row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find(`button:contains("${buttonName}")`).click()
+    }
+    getSeachEntityCompany(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        const company = row.find('a[class="xc-abstract-offer-search-row__company-name"]').then(function (refer) {
+            cy.wrap(refer.text()).as('companyName')
+            cy.wrap(refer.attr('href')).as('companyUrl')
+        })
 
+    }
+    getSeachEntityUpdated(row_number=1){
+        const row = this.getSeachEntity(row_number)
+        row.find('div.xc-abstract-offer-search-row__timer>p').invoke('text').then(function (text) {
+            cy.log(text)
+            const result = lastUpdate(text)
+            cy.wrap(result).as('lastUpdate')
+        })
+    }
+
+//------------------------------------search entity END---------------------------------------
 }
 
 export default TradingSearchPageModel
