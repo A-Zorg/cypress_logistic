@@ -7,7 +7,6 @@ class NegotiationFrame{
             const newPrice = parseFloat(price) + difference
             cy.get('input[formcontrolname=price]').clear().type(newPrice)
         })
-
     }
 
     inputQty(text){
@@ -28,6 +27,14 @@ class NegotiationFrame{
 
     clickButton(name){
         cy.xpath(`//span[contains(text(),'${name}')]`).click()
+    }
+
+    checkValidator(text, should=true){
+        if (should){
+            cy.get('div[class="xc-validation-message"]').should('contain',text)
+        } else{
+            cy.get('body').should('not.contain',text)
+        }
     }
 }
 

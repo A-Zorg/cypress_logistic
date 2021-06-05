@@ -64,6 +64,18 @@ class TradingSearchPageModel{
         cy.xpath(`//ng-dropdown-panel/div/div/div/span[contains(text(),'${text}')]`).scrollIntoView().should('be.visible').click()
     }
 
+    selectAlienCompany(myCompany){
+        cy.get('#select-company > div > span').click()
+        cy.get('div[role="option"]>span').then(function (rows) {
+            for (let row of rows){
+                if (!['Any company', `${myCompany}`].includes(row.textContent)){
+                    cy.wrap(row).click()
+                    break
+                }
+            }
+        })
+    }
+
     checkSearchResult(textList){
         const result = cy.get('xc-abstract-offer-search-row:nth-child(4) > div')
         for (let parameter of textList){
@@ -124,11 +136,11 @@ class TradingSearchPageModel{
     }
     getSeachEntityType(row_number=1){
         const row = this.getSeachEntity(row_number)
-        row.find('span[class="equipment-type-condition__type"]').invoke('text').as('type')
+        row.find('span[data-test-id="equipment-type-condition-type"]').invoke('text').as('type')
     }
     getSeachEntityCondition(row_number=1){
         const row = this.getSeachEntity(row_number)
-        row.find('span[class="equipment-type-condition__condition ng-star-inserted"]').invoke('text').as('condition')
+        row.find('span[data-test-id="equipment-type-condition-condition"]').invoke('text').as('condition')
     }
     getSeachEntityYears(row_number=1){
         const row = this.getSeachEntity(row_number)

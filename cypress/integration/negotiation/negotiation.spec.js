@@ -5,6 +5,7 @@ import TradingOfferPageModel from "../page-object-models/trading-offer-page-mode
 import TradingDealPageModel from "../page-object-models/trading-deal-page-model";
 import TradingInboxPageModel from "../page-object-models/trading-inbox-page-model";
 import PickupReferenceFrameModel from "../page-object-models/pickup_reference-frame.model";
+import {clickButton} from "../page-object-models/general-function";
 const {
   Before,
   After,
@@ -252,3 +253,59 @@ And('Login as user #{string}', (number) => {
         })
     }
 })
+
+And('I try to start some {string} negotiation', (type) => {
+    const model = new TradingSearchPageModel()
+    if (type === 'SALES OFFER'){
+        model.clickFindSalesOfferButton()
+    }else if (type === 'BUYING DEMAND'){
+        model.clickFindBuyingDemandButton()
+    }
+    cy.fixture('cred-user-1').then(function (user) {
+        const model = new TradingSearchPageModel()
+        model.selectAlienCompany(user.company)
+    })
+    clickButton('Search')
+    cy.wait(1000)
+    clickButton('Start negotiation')
+})
+
+And('I change price on {float} and validator:{string} should {string}', (delta, validator, presence) => {
+    const model = new NegotiationFrame()
+    model.inputPrice(delta)
+    if (presence === 'be'){
+        model.checkValidator(validator)
+        clickButton('Submit')
+        model.checkValidator(validator)
+    }else if (presence === 'not be') {
+        model.checkValidator(validator, false)
+    }
+})
+
+And('I change quantity on {float} and validator:{string} should {string}', (value, validator, presence) => {
+    const model = new NegotiationFrame()
+    model.inputQty(toString(value))
+    if (presence === 'be'){
+        model.checkValidator(validator)
+        clickButton('Submit')
+        model.checkValidator(validator)
+    }else if (presence === 'not be') {
+        model.checkValidator(validator, false)
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

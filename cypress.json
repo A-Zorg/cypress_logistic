@@ -1,6 +1,6 @@
 {
   "testFiles": "**/*.feature",
   "chromeWebSecurity": false,
-  "defaultCommandTimeout": 6000,
+  "defaultCommandTimeout": 11000,
   "baseUrl": "http://docker.develop:6680/"
 }

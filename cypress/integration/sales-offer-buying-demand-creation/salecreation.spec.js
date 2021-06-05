@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 import MainBar from "../page-object-models/main-bar.model";
 import TradingNewSalesModel from "../page-object-models/trading-new-sales-model";
 import TradingPageModel from "../page-object-models/trading-page-model";

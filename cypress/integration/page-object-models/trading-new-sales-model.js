@@ -145,6 +145,14 @@ class TradingNewSalesModel {
           })
     }
 
+    checkValidator(text, should=true){
+        if (should){
+            cy.get('div[class="xc-validation-message"]').should('contain',text)
+        } else{
+            cy.get('body').should('not.contain',text)
+        }
+    }
+
 }
 
 export default TradingNewSalesModel
